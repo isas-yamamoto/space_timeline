@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 			  "MOON",
 			  NULL};
   SpiceDouble lat, lon;
-  SpiceDouble et, lt, state[6];
+  SpiceDouble et, lt, state[6], earth[6];
   int i;
   
   if (argc != 7) {
@@ -40,6 +40,8 @@ int main(int argc, char** argv) {
     show_pos(targets[i], state);
   }
   if (getMyLocation(et, lat, lon, state, "IAU_EARTH", ref)) {
+    spkezr_c("EARTH",et, ref, "NONE", obs, earth, &lt);
+    vadd_c(earth,state,state);
     show_pos("MYPOS", state);
   }
   
