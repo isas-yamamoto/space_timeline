@@ -14,16 +14,16 @@ int main(int argc, char** argv) {
                           "URANUS BARYCENTER",
                           "NEPTUNE BARYCENTER",
                           "PLUTO BARYCENTER",
-                           NULL};
+			  NULL};
   SpiceDouble lat, lon;
   SpiceDouble et, lt, state[6];
   int i;
-
+  
   if (argc != 4) {
     fprintf(stderr, "usage: %s yyyy-mm-ddThh:mm:ss lat[deg] lon[deg]\n", argv[0]);
     return EXIT_FAILURE;
   }
-
+  
   const char* utc = argv[1];
   lat = atof(argv[2]);
   lon = atof(argv[3]);
@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     spkezr_c(targets[i],et, "J2000", "NONE", "EARTH", state, &lt);
     show_pos(targets[i], state);
   }
-  if (getMyLocation(et, lat, lon, state)) {
+  if (getMyLocation(et, lat, lon, state,"IAU_EARTH")) {
     show_pos("MYPOS", state);
   }
   
