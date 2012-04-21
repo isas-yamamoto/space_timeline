@@ -2,7 +2,7 @@
 #include <string.h>
 #include "define.h"
 
-int getMyLocation(SpiceDouble et, SpiceDouble lat, SpiceDouble lon, SpiceDouble* st, const SpiceChar* frame) {
+int getMyLocation(SpiceDouble et, SpiceDouble lat, SpiceDouble lon, SpiceDouble* st, const SpiceChar* frame, const SpiceChar* ref) {
   SpiceDouble angles[3];
   SpiceInt axes   [3] = { 3, 2, 3 };
   SpiceInt center  = 500000;
@@ -39,7 +39,7 @@ int getMyLocation(SpiceDouble et, SpiceDouble lat, SpiceDouble lon, SpiceDouble*
   pdpool_c ( "TKFRAME_MYTOPO_ANGLES",   3,                 angles       );
   
   // Observing Position from the EARTH CENTER
-  pxform_c("MYTOPO", "J2000", et, rmat);
+  pxform_c("MYTOPO", ref, et, rmat);
   mxv_c(rmat, z_axis, pv_mypos);
   vscl_c(radii_earth[0], pv_mypos, st);
   

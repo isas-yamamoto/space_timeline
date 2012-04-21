@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     spkezr_c(targets[i],et, ref, "NONE", obs, state, &lt);
     show_pos(targets[i], state);
   }
-  if (getMyLocation(et, lat, lon, state,"IAU_EARTH")) {
+  if (getMyLocation(et, lat, lon, state, "IAU_EARTH", ref)) {
     show_pos("MYPOS", state);
   }
   

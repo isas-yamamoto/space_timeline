@@ -9,7 +9,6 @@
 #define FALSE 0
 #endif
 
-int getMyLocation(SpiceDouble et, SpiceDouble lat, SpiceDouble lon, SpiceDouble* st, const SpiceChar* frame);
-
+int getMyLocation(SpiceDouble et, SpiceDouble lat, SpiceDouble lon, SpiceDouble* st, const SpiceChar* frame, const SpiceChar* ref);
 
 #endif
