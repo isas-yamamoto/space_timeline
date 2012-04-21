@@ -1,0 +1,22 @@
+\begindata
+
+PATH_VALUES     = ( '/home/yukio/spice/pub' )
+PATH_SYMBOLS    = ( 'KERNELS'    )
+KERNELS_TO_LOAD = (
+  '$KERNELS/generic_kernels/lsk/naif0010.tls',
+  '$KERNELS/generic_kernels/pck/pck00010.tpc',
+
+  '$KERNELS/generic_kernels/fk/planets/earth_assoc_itrf93.tf',
+  '$KERNELS/generic_kernels/pck/earth_070425_370426_predict.bpc',
+  '$KERNELS/generic_kernels/pck/earth_720101_070426.bpc',
+
+  '$KERNELS/generic_kernels/pck/moon_pa_de421_1900-2050.bpc',
+  '$KERNELS/generic_kernels/fk/satellites/moon_080317.tf',
+  '$KERNELS/generic_kernels/fk/satellites/moon_assoc_me.tf',
+  '$KERNELS/generic_kernels/spk/planets/de421.bsp',
+)
+
+\begintext
+  '$KERNELS/generic_kernels/fk/stations/earth_topo_050714.tf',
+  '$KERNELS/generic_kernels/spk/stations/earthstns_itrf93_050714.bsp',
+  '$KERNELS/generic_kernels/spk/stations/earthstns_itrf93_050714.bsp',
