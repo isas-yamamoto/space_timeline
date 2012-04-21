@@ -10,10 +10,11 @@ void show_pos(const char* target, SpiceDouble* state) {
 
 int main(int argc, char** argv) {
   SpiceChar* targets[] = {"SUN","MERCURY","VENUS","EARTH","MARS",
-                          "JUPITER BARYCENTER",
-                          "URANUS BARYCENTER",
-                          "NEPTUNE BARYCENTER",
-                          "PLUTO BARYCENTER",
+			  "JUPITER BARYCENTER",
+			  "URANUS BARYCENTER",
+			  "NEPTUNE BARYCENTER",
+			  "PLUTO BARYCENTER",
+			  "MOON",
 			  NULL};
   SpiceDouble lat, lon;
   SpiceDouble et, lt, state[6];
