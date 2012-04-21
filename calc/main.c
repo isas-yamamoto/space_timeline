@@ -20,16 +20,16 @@ int main(int argc, char** argv) {
   SpiceDouble et, lt, state[6];
   int i;
   
-  if (argc != 4) {
-    fprintf(stderr, "usage: %s yyyy-mm-ddThh:mm:ss lat[deg] lon[deg]\n", argv[0]);
+  if (argc != 5) {
+    fprintf(stderr, "usage: %s kernel yyyy-mm-ddThh:mm:ss lat[deg] lon[deg]\n", argv[0]);
     return EXIT_FAILURE;
   }
-  
-  const char* utc = argv[1];
-  lat = atof(argv[2]);
-  lon = atof(argv[3]);
-  
-  furnsh_c("isac.meta");
+
+  furnsh_c(argv[1]);  
+  const char* utc = argv[2];
+  lat = atof(argv[3]);
+  lon = atof(argv[4]);
+
   utc2et_c(utc, &et);
   for (i=0; targets[i] != NULL; ++i) {
     spkezr_c(targets[i],et, "J2000", "NONE", "EARTH", state, &lt);
