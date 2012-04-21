@@ -9,7 +9,7 @@ $datetime = $input['datetime'];
 $lat = $input['lat'];
 $lon = $input['lon'];
 
-$cmd = "/usr/local/bin/earth_info isac.meta $datetime $lat $lon";
+$cmd = "/usr/local/bin/earth_info isac.meta EARTH J2000 $datetime $lat $lon";
 exec($cmd,$output,$ret);
 
 foreach($output as $line) {

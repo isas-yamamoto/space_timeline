@@ -20,19 +20,23 @@ int main(int argc, char** argv) {
   SpiceDouble et, lt, state[6];
   int i;
   
-  if (argc != 5) {
-    fprintf(stderr, "usage: %s kernel yyyy-mm-ddThh:mm:ss lat[deg] lon[deg]\n", argv[0]);
+  if (argc != 7) {
+    fprintf(stderr, " usage: %s kernel-file obs ref yyyy-mm-ddThh:mm:ss lat[deg] lon[deg]\n", argv[0]);
+    fprintf(stderr, "    ex: %s isac.meta EARTH J2000 2000-01-01T00:00:00 35.66 139.68\n", argv[0]);
+    fprintf(stderr, "output: target,x,y,z,vx,vy,vz\n");
     return EXIT_FAILURE;
   }
-
+  
   furnsh_c(argv[1]);  
-  const char* utc = argv[2];
-  lat = atof(argv[3]);
-  lon = atof(argv[4]);
-
+  const char* obs = argv[2];
+  const char* ref = argv[3];
+  const char* utc = argv[4];
+  lat = atof(argv[5]);
+  lon = atof(argv[6]);
+  
   utc2et_c(utc, &et);
   for (i=0; targets[i] != NULL; ++i) {
-    spkezr_c(targets[i],et, "J2000", "NONE", "EARTH", state, &lt);
+    spkezr_c(targets[i],et, ref, "NONE", obs, state, &lt);
     show_pos(targets[i], state);
   }
   if (getMyLocation(et, lat, lon, state,"IAU_EARTH")) {
