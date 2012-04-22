@@ -36,16 +36,22 @@ int main(int argc, char** argv) {
   lon = atof(argv[6]);
   
   utc2et_c(utc, &et);
+
+  // show UTC
   et2utc_c( et, "ISOC", 0, LEN, utcstr);
   printf("%s\n", utcstr);
-  for (i=0; targets[i] != NULL; ++i) {
-    spkezr_c(targets[i],et, ref, "NONE", obs, state, &lt);
-    show_pos(targets[i], state);
-  }
+
+  // show my location
   if (getMyLocation(et, lat, lon, state, "IAU_EARTH", ref)) {
     spkezr_c("EARTH",et, ref, "NONE", obs, earth, &lt);
     vadd_c(earth,state,state);
     show_pos("MYPOS", state);
+  }
+
+  // show planets' location
+  for (i=0; targets[i] != NULL; ++i) {
+    spkezr_c(targets[i],et, ref, "NONE", obs, state, &lt);
+    show_pos(targets[i], state);
   }
   
   return EXIT_SUCCESS;
