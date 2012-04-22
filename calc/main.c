@@ -21,9 +21,9 @@ int main(int argc, char** argv) {
   SpiceDouble et, lt, state[6], earth[6];
   int i;
   
-  if (argc != 7) {
-    fprintf(stderr, " usage: %s kernel-file obs ref yyyy-mm-ddThh:mm:ss lat[deg] lon[deg]\n", argv[0]);
-    fprintf(stderr, "    ex: %s isac.meta EARTH J2000 2000-01-01T00:00:00 35.66 139.68\n", argv[0]);
+  if (argc != 8) {
+    fprintf(stderr, " usage: %s kernel-file obs ref-frame earth-frame yyyy-mm-ddThh:mm:ss lat[deg] lon[deg]\n", argv[0]);
+    fprintf(stderr, "    ex: %s isac.meta EARTH J2000 IAU_EARTH 2000-01-01T00:00:00 35.66 139.68\n", argv[0]);
     fprintf(stderr, "output: target,x,y,z,vx,vy,vz\n");
     return EXIT_FAILURE;
   }
@@ -31,9 +31,10 @@ int main(int argc, char** argv) {
   furnsh_c(argv[1]);  
   const char* obs = argv[2];
   const char* ref = argv[3];
-  const char* utc = argv[4];
-  lat = atof(argv[5]);
-  lon = atof(argv[6]);
+  const char* earth_frm = argv[4];
+  const char* utc = argv[5];
+  lat = atof(argv[6]);
+  lon = atof(argv[7]);
   
   utc2et_c(utc, &et);
 
@@ -42,7 +43,7 @@ int main(int argc, char** argv) {
   printf("%s\n", utcstr);
 
   // show my location
-  if (getMyLocation(et, lat, lon, state, "IAU_EARTH", ref)) {
+  if (getMyLocation(et, lat, lon, state, earth_frm, ref)) {
     spkezr_c("EARTH",et, ref, "NONE", obs, earth, &lt);
     vadd_c(earth,state,state);
     show_pos("MYPOS", state);

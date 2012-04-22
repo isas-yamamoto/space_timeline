@@ -6,8 +6,8 @@ foreach($_GET as $key => $val) {
 }
 
 $datetime = str_replace(' ', 'T', gmdate('Y-m-d H:i:s'));
-if (isset($input['datetime'])) {
-  $datetime = $input['datetime'];
+if (isset($input['t'])) {
+  $datetime = $input['t'];
 }
 
 $lat = 0;
@@ -28,7 +28,13 @@ $ref = 'J2000';
 if (isset($input['ref'])) {
   $ref = $input['ref'];
 }
-$cmd = "/usr/local/bin/earth_info isac.meta $obs $ref $datetime $lat $lon";
+
+$efrm = 'IAU_EARTH';
+if (isset($input['efrm'])) {
+  $efrm = $input['efrm'];
+}
+
+$cmd = "/usr/local/bin/earth_info isac.meta $obs $ref $efrm $datetime $lat $lon";
 exec($cmd,$output,$ret);
 
 echo "{\n";
