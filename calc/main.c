@@ -9,6 +9,7 @@ void show_pos(const char* target, SpiceDouble* state) {
 }
 
 int main(int argc, char** argv) {
+  SpiceChar utcstr[LEN];
   SpiceChar* targets[] = {"SUN","MERCURY","VENUS","EARTH","MARS",
 			  "JUPITER BARYCENTER",
 			  "URANUS BARYCENTER",
@@ -35,6 +36,8 @@ int main(int argc, char** argv) {
   lon = atof(argv[6]);
   
   utc2et_c(utc, &et);
+  et2utc_c( et, "ISOC", 0, LEN, utcstr);
+  printf("%s\n", utcstr);
   for (i=0; targets[i] != NULL; ++i) {
     spkezr_c(targets[i],et, ref, "NONE", obs, state, &lt);
     show_pos(targets[i], state);
